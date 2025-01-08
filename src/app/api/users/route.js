@@ -1,7 +1,6 @@
 //Import data
 import { z } from 'zod'
 import { data } from '../../../lib/data'
-import path from 'path'
 
 //Users schema
 
@@ -9,8 +8,8 @@ const userSchema = z.object({
     id: z.number(),
     name: z.string(),
     lastname: z.string(),
-    age: z.number(),
-    genre: z.string().optional()
+    age: z.number().optional(),
+    email: z.string()
 })
 
 // GET
@@ -47,6 +46,7 @@ export async function POST(req) {
                     message: issue.message
                 }
             ))
+
 
             return new Response(JSON.stringify({errors: err}), {
                 status: 400,
