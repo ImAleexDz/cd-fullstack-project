@@ -1,4 +1,4 @@
-import { data } from '../../../../lib/data'
+import { data } from '@/lib/data'
 //GET api users id
 
 const getUserById = (id) => {
