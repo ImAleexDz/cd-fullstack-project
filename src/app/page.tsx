@@ -33,7 +33,7 @@ export default function Home() {
 
   const loadUsers = async () => {
     try {
-      
+
       const { data: users, error: usersError } = await supabase.from('users').select();
 
       if (usersError) {
@@ -62,13 +62,20 @@ export default function Home() {
   const handleFormAction = async (formData: FormData) => {
     if (formValues.id === -1) {
       await createUser(formData);
-      console.log("hola")
+
+
     } else {
-      console.log("hola 2");
+      await updateUser(formData);
     }
-    //setFormValues(initialState);
+    setFormValues(initialState);
     loadUsers();
   };
+
+  const handleEditUser = (user: User) => {
+    //Rellenar el form
+    setFormValues(user);
+    console.log(user);
+  }
 
   return (
     <div>
@@ -107,10 +114,11 @@ export default function Home() {
 
       <div>
         {users?.map(user => (
-          <UserItem 
-          {...user} 
-          key={`users-list-item-${user.id}`}
-          onRefresh={loadUsers}
+          <UserItem
+            {...user}
+            key={`users-list-item-${user.id}`}
+            onRefresh={loadUsers}
+            onEdit={handleEditUser}
           />
         ))}
       </div>

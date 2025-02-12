@@ -1,6 +1,5 @@
 'use client'
 import createClient from '@/utils/supabase/client';
-import { PostgrestError } from '@supabase/supabase-js';
 import { FC, useState } from 'react'
 
 type User = {
@@ -14,6 +13,7 @@ type User = {
 
   type UserItemProps = User & {
     onRefresh: () => void
+    onEdit: (user: User) => void
   }
 
   const supabase = createClient();
@@ -24,7 +24,8 @@ const UserItem: FC<UserItemProps> = ({
     age,
     email,
     id,
-    onRefresh
+    onRefresh,
+    onEdit
 }) => {
 
     const [error, setError] = useState<string | null>();
@@ -79,7 +80,15 @@ const UserItem: FC<UserItemProps> = ({
             >
                 {deleteLabel}
             </button>
-            <button type='button' className="btn btn-primary ms-2">
+            <button type='button' className="btn btn-primary ms-2"
+            onClick={() => onEdit({
+                id,
+                firstname,
+                lastname,
+                email,
+                age
+            })}
+            >
                 Editar
             </button>
         </div>
