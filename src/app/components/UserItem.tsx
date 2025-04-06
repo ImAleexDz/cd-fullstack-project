@@ -28,7 +28,7 @@ const UserItem: FC<UserItemProps> = ({
     onEdit
 }) => {
 
-    const [error, setError] = useState<string | null>();
+    const [error, setError] = useState<string | null | any>();
     const [deleteLabel, setDeleteLabel] = useState('Eliminar');
     const [confirmDelete, setConfirmDelete] = useState(false);
 
